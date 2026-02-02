@@ -218,3 +218,18 @@ plt.title('Cancellation Rate by Room Match vs Mismatch')
 plt.xlabel('Room Mismatch (0 = Match, 1 = Mismatch)')
 plt.ylabel('Cancellation Rate (%)')
 plt.show()
+
+df_cancelled = df[df['is_canceled'] == 'Cancelled']
+px.box(data_frame=df_cancelled, x='reserved_room_type' , y = 'adr' , color ='hotel' , template='plotly_dark')
+
+df['arrival_date_month'] = pd.Categorical(df['arrival_date_month'], categories=month_order, ordered=True)
+
+plt.figure(figsize=(14, 7))
+sns.lineplot(data=df, x='arrival_date_month', y='adr', hue='hotel', marker='o')
+plt.title('Average Daily Rate (ADR) by Month and Hotel Type', fontsize=16)
+plt.xlabel('Arrival Month', fontsize=12)
+plt.ylabel('Average Daily Rate (ADR)', fontsize=12)
+plt.grid(True, linestyle='--', alpha=0.7)
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
